@@ -1,0 +1,3 @@
+/Users/goirand/Personal/Dev/Tools/SourceFileCompare/build/CMakeFiles/sfc.dir
+/Users/goirand/Personal/Dev/Tools/SourceFileCompare/build/CMakeFiles/edit_cache.dir
+/Users/goirand/Personal/Dev/Tools/SourceFileCompare/build/CMakeFiles/rebuild_cache.dir

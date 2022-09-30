@@ -1,0 +1,7 @@
+[
+{
+  "directory": "/Users/goirand/Personal/Dev/Tools/SourceFileCompare/build",
+  "command": "/usr/bin/clang -isystem /usr/local/include -g -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk -o CMakeFiles/sfc.dir/sfc.c.o -c /Users/goirand/Personal/Dev/Tools/SourceFileCompare/sfc.c",
+  "file": "/Users/goirand/Personal/Dev/Tools/SourceFileCompare/sfc.c"
+}
+]
