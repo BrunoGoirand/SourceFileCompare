@@ -52,5 +52,5 @@ The code is using the string library [NeatString](https://github.com/BrunoGoiran
 
 ## To Do
 
-- Add C style comments removal `- `..`) */`
+- Add C style comments removal `/* ... */`
 - Add comments line starting with `#`
