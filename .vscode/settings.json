@@ -1,0 +1,7 @@
+{
+  "files.exclude": {
+    "*.dSYM/": true,
+    "**/_bigflix": true,
+    "**/_reeceflix": true
+  }
+}
