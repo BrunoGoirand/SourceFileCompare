@@ -4,24 +4,11 @@
 
 #include <NeatString/NeatString.h>
 
-/* returns
+/**
+ * 
+ * 
+ */
 
-1 - issue with filenames
-2 -  memory allocation issue
-
-*/
-#define VAL_ARGS  1 // validate arguments
-#define BUILD_FN  2 // build filename
-#define OPEN__FN  3 // open file
-#define GET_NXLN -1 // no more line to treat
-#define RMV_CMTS  5 // remove comments
-#define RMV__SPC  6 // remove spaces
-
-#define MAX_CHAR  160
-
-/*
-** all functions return 0 when successful
-*/
 
 /*
 ** command line arguments management
@@ -153,13 +140,13 @@ int main(int argc, char **argv) {
 	char *fn1, *fn2;  // file name
 	int length1, length2;
 
-	if(validateArguments(argc, argv)) return(VAL_ARGS);
+	if(validateArguments(argc, argv)) return(EXIT_FAILURE);
 
-	if(buildFilename(argc, argv, 1, &fn1)) return(BUILD_FN);
-	if(buildFilename(argc, argv, 2, &fn2)) return(BUILD_FN);
+	if(buildFilename(argc, argv, 1, &fn1)) return(EXIT_FAILURE);
+	if(buildFilename(argc, argv, 2, &fn2)) return(EXIT_FAILURE);
 
-	if(openFile(fn1, &fp1)) return(OPEN__FN);
-	if(openFile(fn2, &fp2)) return(OPEN__FN);
+	if(openFile(fn1, &fp1)) return(EXIT_FAILURE);
+	if(openFile(fn2, &fp2)) return(EXIT_FAILURE);
 
 
 	char *line1 = NULL, *line2 = NULL;
@@ -182,8 +169,10 @@ int main(int argc, char **argv) {
 			break;
 		}
 
-		free(line1);
-		free(line2);
+		if(loop1) 
+			free(line1);
+		if(loop2)
+			free(line2);
 	}
 
 	if(loop1 && loop2) {
@@ -191,19 +180,30 @@ int main(int argc, char **argv) {
 		fprintf(stdout, "[%d][%s]\n", ln1, line1);
 		fprintf(stdout, "[%d][%s]\n", ln2, line2);
 	}
-	else
-		fprintf(stderr, "[[%d|%d]]\n\n", loop1, loop2);
+	else if(!(loop1 ^ loop2)) {
+		fprintf(stderr, "\n--FILES IDENTICALS--\n");
+	}
+	else {
+		fprintf(stderr, "\n--EOF REACHED--\n");
+		//fprintf(stderr, "[[%d|%d]]\n\n", loop1, loop2);
+		if(!loop1)
+			fprintf(stdout, "[%s]\n", fn1);
+		else
+			fprintf(stdout, "[%s]\n", fn2);
+	}
 
 	fprintf(stderr, "\n");
 
 	fclose(fp1);
 	fclose(fp2);
 
-	//if(line1) free(line1);
-	//if(line2) free(line2);
+	if(loop1) 
+		free(line1);
+	if(loop2) 
+		free(line2);
 
 	free(fn1);
 	free(fn2);
 
-	return(0);
+	return(EXIT_SUCCESS);
 }
